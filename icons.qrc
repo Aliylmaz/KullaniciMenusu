@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/Thesquid.ink-Free-Flat-Sample-Space-rocket.512.png</file>
+    </qresource>
+</RCC>
