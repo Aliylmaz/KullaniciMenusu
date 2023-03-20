@@ -29,10 +29,12 @@ void MainWindow::on_pushButton_clicked()
         QString Mail = ui->Mail->text();
         QString Sifre = ui->Sifre->text();
 
+        //QString dbPath = QCoreApplication::applicationDirPath() + "/sqldatabase/database.db";
+
 
         // Veritabanına bağlan
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName("C:/sqlProject/database.db");
+        db.setDatabaseName("/sqldatabase/database.db");
         if(!db.open()) {
             QMessageBox::critical(0, "Hata", "Veritabanına bağlanılamadı.");
             return;
@@ -70,7 +72,6 @@ void MainWindow::on_pushButton_2_clicked()
     reg->show();
 
 }
-
 
 
 
