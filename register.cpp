@@ -6,6 +6,7 @@
 #include <QSqlError>
 #include <QCryptographicHash>
 #include <mainwindow.h>>
+#include <QDir>
 
 
 Register::Register(QWidget *parent) :
@@ -29,13 +30,17 @@ void Register::on_RegisterButton_clicked()
     QString Telefon = ui->lineEdit_3->text();
     QString Sifre = ui->lineEdit_4->text();
 
+       //QString dbPath = QCoreApplication::applicationDirPath() + "sqldatabase/database.db";
     // Veritabanına bağlan
+    //QString dbPath = QDir::currentPath() + "/sqldatabase/database.db";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/sqlProject/database.db");
+    db.setDatabaseName("/sqldatabase/database.db");
+
     if(!db.open()) {
-        QMessageBox::critical(0, "Hata", "Veritabanına bağlanılamadı.");
+        QMessageBox::critical(0, "Hata", "Veritabanına bağlanılamadı. Hata: " + db.lastError().text());
         return;
     }
+
 
        QString passwordHash = QString(QCryptographicHash::hash((Sifre.toUtf8()), QCryptographicHash::Sha256).toHex());
     // Verileri veritabanına ekle
@@ -80,4 +85,3 @@ void Register::on_pushButton_toggled(bool checked)
         ui->pushButton->setText("Göster");
     }
 }
-
